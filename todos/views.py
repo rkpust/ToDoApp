@@ -4,4 +4,4 @@ from django.http import HttpResponse
 # Create your views here.
 
 def list_todo_items(request):
-    return HttpResponse('From list_todo_items')
+    return render(request, 'todos/todo_list.html')
