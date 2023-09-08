@@ -25,7 +25,7 @@
                                 <form action="/todos/insert_todo/" method="post" autocomplete="off">
                                     {% csrf_token %}
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="content" placeholder="Add your task...">
+                                        <input type="text" class="form-control" name="content" placeholder="Add your task..." required>
                                         <div class="input-group-append text-info">
                                             <span class="input-group-text bg-white py-0">
                                                 <button type="submit" class="btn btn-sm text-info">
