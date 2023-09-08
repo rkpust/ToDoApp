@@ -37,7 +37,19 @@
                                 </form>
                             </li>
                             {% for todo in todo_list %}
-                            <li class="list-group-item">{{ todo.content }}</li>
+                            <li class="list-group-item">
+                                {{ todo.content }}
+                                <form action="" method="post" class="float-right d-line">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn">
+                                        <i class="fa-regular fa-trash-can fa-lg text-danger"></i>
+                                    </button>
+                                </form>
+                            </li>
+                            {% empty %}
+                            <li class="list-group-item">
+                                <span class="font-italic">No todo item found.</span>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div> 
