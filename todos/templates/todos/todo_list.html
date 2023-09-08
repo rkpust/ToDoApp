@@ -17,13 +17,13 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header shadow-sm bg-white">
-                        <h1 class="display-5 text-info"><i class="fa-solid fa-check-double"></i> Todo App</h1>
+                        <h1 class="display-5 text-info"><i class="fa-solid fa-list-check"></i> Todo App</h1>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post" autocomplete="off">
+                        <form action="/todos/insert_todo/" method="post" autocomplete="off">
                             {% csrf_token %}
                             <div class="input-group">
-                                <input type="text" class="form-control" name="content">
+                                <input type="text" class="form-control" name="content" placeholder="Add your task...">
                                 <div class="input-group-append text-info">
                                     <span class="input-group-text bg-white py-0">
                                         <button type="submit" class="btn btn-sm text-info">
