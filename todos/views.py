@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpRequest
 from .models import ToDo
 
 # Create your views here.
+def index(request):
+    return render(request, 'todos/index.html')
 
 def list_todo_items(request):
     context = { 'todo_list': ToDo.objects.all() }
