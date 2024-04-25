@@ -20,7 +20,7 @@
                                 <input type="text" class="form-control" name="content" placeholder="Add your task..." required>
                                 <div class="input-group-append text-info">
                                     <span class="input-group-text bg-white py-0">
-                                        <button type="submit" class="btn btn-sm text-info">
+                                        <button type="submit" class="btn btn-sm text-info" title="Add Todo">
                                             <i class="fa-solid fa-circle-plus fa-lg"></i>
                                         </button>
                                     </span>    
@@ -28,21 +28,35 @@
                             </div>
                         </form>
                     </li>
-                    {% for todo in todo_list %}
-                    <li class="list-group-item">
-                        {{ todo.content }}
-                        <form action="{% url 'delete_todo_item' todo.id %}" method="post" class="float-right d-line">
+
+                    <table>
+                        <form action="" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn">
-                                <i class="fa-regular fa-trash-can fa-lg text-danger"></i>
-                            </button>
+                            <button type="submit" class="btn btn-sm btn-outline-info" style="position: absolute; right: 10px; top: 25px;" formaction="{% url 'update_selected_todo_status' %}" title="Update Status"><i class="fa-solid fa-retweet fa-fw"></i></button>
+
+                            {% for todo in todo_list %}
+                                <li class="list-group-item">
+                                    {{ todo.content }}
+                                    <div class="d-flex float-right">
+                                        <select name="status_{{ todo.id }}" id="{{ todo.id }}" class="" style="height: 35px; padding-top: 0; padding-bottom: 0;" title="Status">
+                                            <option value="" {% if todo.status == None %}selected{% endif %}>Select</option>
+                                            <option value="Ongoing" {% if todo.status == 'Ongoing' %}selected{% endif %}>Ongoing</option>
+                                            <option value="Pending" {% if todo.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                            <option value="Completed" {% if todo.status == 'Completed' %}selected{% endif %}>Completed</option>
+                                        </select>
+
+                                        <button type="submit" class="btn" formaction="{% url 'delete_todo_item' todo.id %}" title="Delete Todo">
+                                            <i class="fa-regular fa-trash-can fa-lg text-danger"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                {% empty %}
+                                <li class="list-group-item">
+                                    <span class="font-italic">No todo item found.</span>
+                                </li>
+                            {% endfor %}
                         </form>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item">
-                        <span class="font-italic">No todo item found.</span>
-                    </li>
-                    {% endfor %}
+                    </table>
                 </ul>
             </div> 
         </div> 
