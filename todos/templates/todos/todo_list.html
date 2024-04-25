@@ -12,7 +12,7 @@
                 <h1 class="display-5 text-info"><i class="fa-solid fa-list-check"></i> Todo App</h1>
             </div>
             <div class="card-body">
-                <ul class="list-group">
+                <ul class="list-group" >
                     <li class="list-group-item">
                         <form action="/todos/insert_todo/" method="post" autocomplete="off">
                             {% csrf_token %}
@@ -29,17 +29,17 @@
                         </form>
                     </li>
 
-                    <table>
+                    <div style="max-height: 300px; overflow-y: auto;">
                         <form action="" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-sm btn-outline-info" style="position: absolute; right: 10px; top: 25px;" formaction="{% url 'update_selected_todo_status' %}" title="Update Status"><i class="fa-solid fa-retweet fa-fw"></i></button>
 
                             {% for todo in todo_list %}
-                                <li class="list-group-item">
+                                <li class="list-group-item" style="font-size: 14px; font-weight: bold;">
                                     {{ todo.content }}
-                                    <div class="d-flex float-right">
-                                        <select name="status_{{ todo.id }}" id="{{ todo.id }}" class="" style="height: 35px; padding-top: 0; padding-bottom: 0;" title="Status">
-                                            <option value="" {% if todo.status == None %}selected{% endif %}>Select</option>
+                                    <div class="d-flex float-right" style="position: inherit; top: 50%; transform: translateY(-5%); font-size: 10px;"> 
+                                        <select name="status_{{ todo.id }}" id="{{ todo.id }}" class="" style="height: 28px;" title="Status">
+                                            <option value="" {% if todo.status == None %}selected{% endif %}>---Select---</option>
                                             <option value="Ongoing" {% if todo.status == 'Ongoing' %}selected{% endif %}>Ongoing</option>
                                             <option value="Pending" {% if todo.status == 'Pending' %}selected{% endif %}>Pending</option>
                                             <option value="Completed" {% if todo.status == 'Completed' %}selected{% endif %}>Completed</option>
@@ -55,19 +55,19 @@
                                     <span class="font-italic">No todo item found.</span>
                                 </li>
                             {% endfor %}
-                        </ul>
-                    </div> 
-                </div> 
-            </div>
-        </div>
-        <footer class="mt-5 text-center shadow-lg p-3 bg-body rounded d-flex d-sm-block">
-            <span class="align-self-start mr-3">Developed by <a href="https://www.linkedin.com/in/rkpust/" target="_blank">Rezaul Karim</a></span>
-            <span class="align-self-end ml-3">All Rights Reserved &COPY; 2023</span>
-        </footer>
+                        </form>
+                    </div>
+                </ul>
+            </div> 
+        </div> 
     </div>
+    <footer class="mt-5 text-center shadow-lg p-2 bg-info d-flex d-sm-block" style="position: fixed; left: 0; bottom: 0; width: 100%; z-index: 10000;">
+        <span class="align-self-start mr-3">Developed by <a href="https://www.linkedin.com/in/rkpust/" target="_blank">Rezaul Karim</a></span>
+        <span class="align-self-end ml-3">All Rights Reserved &COPY; 2023</span>
+    </footer>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
-</body>
-</html>
+{% endblock %}
